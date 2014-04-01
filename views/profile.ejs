@@ -2,8 +2,8 @@
 <html>
 <head>
 	<title>Node Authentication</title>
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
 	<style>
 		body 		{ padding-top:80px; word-wrap:break-word; }
 	</style>
@@ -17,19 +17,20 @@
 	</div>
 
 	<div class="row">
-
+		<!-- <%= JSON.stringify(user) %> -->
 		<!-- LOCAL INFORMATION -->
 		<div class="col-sm-6">
 			<div class="well">
 				<h3><span class="fa fa-user"></span> Local</h3>
 
-				<% if (user.local.email) { %>
+				<% if (user.email) { %>
 					<p>
 						<strong>id</strong>: <%= user._id %><br>
-						<strong>email</strong>: <%= user.local.email %><br>
-						<strong>password</strong>: <%= user.local.password %>
+						<strong>email</strong>: <%= user.email %><br>
+						<strong>password_sha</strong>: <%= user.password_sha %><br>
+						<strong>password_salt</strong>: <%= user.salt %>
 					</p>
-					
+
 					<a href="/unlink/local" class="btn btn-default">Unlink</a>
 				<% } else { %>
 					<a href="/connect/local" class="btn btn-default">Connect Local</a>
@@ -46,6 +47,7 @@
 				<!-- check if the user has this token (is the user authenticated with this social account) -->
 				<% if (user.facebook.token) { %>
 					<p>
+						<img src="<%= user.facebook.picture %>" /><br>
 						<strong>id</strong>: <%= user.facebook.id %><br>
 						<strong>token</strong>: <%= user.facebook.token %><br>
 						<strong>email</strong>: <%= user.facebook.email %><br>
@@ -69,10 +71,12 @@
 
 				<% if (user.twitter.token) { %>
 					<p>
+						<img src="<%= user.twitter.picture %>" /><br>
 						<strong>id</strong>: <%= user.twitter.id %><br>
 						<strong>token</strong>: <%= user.twitter.token %><br>
 						<strong>display name</strong>: <%= user.twitter.displayName %><br>
-						<strong>username</strong>: <%= user.twitter.username %>
+						<strong>username</strong>: <%= user.twitter.username %><br>
+						<!-- <strong>profile</strong>: <%= JSON.stringify(user.twitter.profile) %> -->
 					</p>
 
 					<a href="/unlink/twitter" class="btn btn-info">Unlink</a>
@@ -90,10 +94,12 @@
 
 				<% if (user.google.token) { %>
 					<p>
+						<img src="<%= user.google.picture %>" /><br>
 						<strong>id</strong>: <%= user.google.id %><br>
 						<strong>token</strong>: <%= user.google.token %><br>
 						<strong>email</strong>: <%= user.google.email %><br>
-						<strong>name</strong>: <%= user.google.name %>
+						<strong>name</strong>: <%= user.google.name %><br>
+						<!-- <strong>profile</strong>: <%= JSON.stringify(user.google.profile) %> -->
 					</p>
 
 					<a href="/unlink/google" class="btn btn-danger">Unlink</a>

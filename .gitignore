@@ -16,3 +16,9 @@ node_modules
 
 config/secretDatabase.js
 config/secretAuth.js
+config/auth.js_mine
+config/auth.js_original
+config/passport.js
+app/routes.js
+app/models/user.js
+server.js
