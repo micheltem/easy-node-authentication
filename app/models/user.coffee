@@ -44,9 +44,8 @@ class User
 				console.error err
 				cb("Oh no! We experienced an issue!", null)
 			else
-				console.error err if err?
 				_value = body.rows[0]?.value
-				console.log "findById found user: \"#{id}\"", _value
+				# console.log "findById found user: \"#{id}\"", _value
 				cb null, new User _value
 
 	@findByEmail: (email, cb) ->
@@ -69,11 +68,9 @@ class User
 		if strategy is "facebook" then _view = "byFacebook"
 		if strategy is "google" then _view = "byGoogle"
 		throw "The strategy \"#{strategy}\" has no corresponding view" if !strategy?
-
 		console.log "strategy:", strategy
 		userDB.view "users", _view, key: id, (err, body) ->
-			console.log "Back", arguments
-			console.log "findByStrategy found user:", body.rows[0]?.value
+			# console.log "findByStrategy found user:", body.rows[0]?.value
 			if body.rows[0]?.value
 				cb null, new User(body.rows[0].value)
 			else
@@ -82,7 +79,6 @@ class User
 	save: (cb) ->
 		@id = @local.email
 		userDB.insert @, @._id, (err, body, header) ->
-			console.log arguments
 			console.log "Inserted:", body
 			cb null, @
 
